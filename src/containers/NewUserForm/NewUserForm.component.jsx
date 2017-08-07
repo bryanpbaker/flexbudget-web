@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import createUser method
 import { createUser } from '../../actions/AuthActions';
 
-class HomePage extends Component {
+class NewUserForm extends Component {
   constructor() {
     super();
 
@@ -30,17 +30,27 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div className="home-page">
-        Home Page
-
+      <div className="new-user-form">
         <form onSubmit={this.handleFormSubmit}>
-          <input name="newUserEmail" type="email" placeholder="Email" onChange={this.handleInputChange} value={this.state.newUserEmail} />
-          <input name="newUserPassword" type="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.newUserPassword} />
+          <input
+            name="newUserEmail"
+            type="email"
+            placeholder="Email"
+            onChange={this.handleInputChange}
+            value={this.state.newUserEmail}
+          />
+          <input
+            name="newUserPassword"
+            type="password"
+            placeholder="Password"
+            onChange={this.handleInputChange}
+            value={this.state.newUserPassword}
+          />
           <input type="submit" value="Submit" />
         </form>
       </div>
     );
   }
-}
+};
 
-export default connect(null, { createUser })(HomePage);
+export default connect(null, { createUser })(NewUserForm);
