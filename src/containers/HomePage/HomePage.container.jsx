@@ -1,26 +1,46 @@
 import React, { Component } from 'react';
-import fb from '../../config/firebase.config';
+import { connect } from 'react-redux';
+// import createUser method
+import { createUser } from '../../actions/AuthActions';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   constructor() {
     super();
 
-    this.auth = fb.auth();
-    this.createUser = this.createUser.bind(this);
+    this.state = {
+      newUserEmail: '',
+      newUserPassword: '',
+    };
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  createUser() {
-    this.auth.createUserWithEmailAndPassword('bryanpbaker@gmail.com', 'Harley85')
-      .then(user => console.log(user))
-      .catch(error => console.error(error));
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+
+    this.props.createUser(this.state.newUserEmail, this.state.newUserPassword);
   }
 
   render() {
     return (
       <div className="home-page">
         Home Page
-        <button onClick={this.createUser}>Click!</button>
+
+        <form onSubmit={this.handleFormSubmit}>
+          <input name="newUserEmail" type="email" placeholder="Email" onChange={this.handleInputChange} value={this.state.newUserEmail} />
+          <input name="newUserPassword" type="password" placeholder="Password" onChange={this.handleInputChange} value={this.state.newUserPassword} />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
 }
+
+export default connect(null, { createUser })(HomePage);
