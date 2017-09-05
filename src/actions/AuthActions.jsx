@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import fb from '../config/firebase.config';
 
 const auth = fb.auth();
@@ -29,5 +30,15 @@ export function authenticateUser(email, password) {
         dispatch({ type: AUTHENTICATE_USER, payload: user });
       })
       .catch(error => console.error(error));
+  };
+}
+
+export function facebookAuthenticateUser() {
+  const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
+  return (dispatch) => {
+    auth
+      .signInWithPopup(facebookProvider)
+        .then(res => console.log(res));
   };
 }
