@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LandingPage from './pages/LandingPage/LandingPage.component'
+import Dashboard from './pages/Dashboard/Dashboard.component';
+import LandingPage from './pages/LandingPage/LandingPage.component';
 import { getCurrentUser, signUserOut } from './actions/AuthActions';
 
 import './App.css';
@@ -13,9 +14,10 @@ class App extends Component {
   render() {
     if (this.props.currentUser) {
       return (
-        <div className="dashboard">
-          {this.props.currentUser.displayName}
-          <button onClick={this.props.signUserOut}>Sign out</button>
+        <div>
+          <Dashboard
+            user={this.props.currentUser}
+          />
         </div>
       );
     } else if (this.props.currentUser === false) {
