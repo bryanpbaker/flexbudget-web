@@ -27,6 +27,7 @@ class CreateBudget extends Component {
     this.props.createBudget(this.props.user.uid, this.state.budgetName);
     setTimeout(() => {
       this.props.toggleModal();
+      this.setState({ budgetName: '' });
     }, 300);
   }
 
