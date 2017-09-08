@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
-import SignOut from '../../containers/SignOut/SignOut.container';
-import Budget from '../../containers/Budget/Budget.container';
+import Budget from '../../components/Budget/Budget.component';
+// import action creators
 import { fetchBudgets, createBudget, fetchSelectedBudget } from '../../actions/UserDataActions.jsx';
 
 class Dashboard extends Component {
@@ -13,21 +13,16 @@ class Dashboard extends Component {
     this.props.fetchSelectedBudget(this.props.currentUser.uid);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('budgets', nextProps.budgets);
-  }
-
   render() {
     return (
       <div className="dashboard">
         <DashboardHeader
           user={this.props.user}
+          selectedBudget={this.props.selectedBudget}
         />
-        <CreateBudget
-          createBudget={() => this.props.createBudget(this.props.currentUser.uid)}
+        <Budget
+          selectedBudget={this.props.selectedBudget}
         />
-        <SignOut />
-        <Budget />
       </div>
     );
   }

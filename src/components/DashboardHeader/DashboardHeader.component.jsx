@@ -1,17 +1,16 @@
 import React from 'react';
-import Styles from './DashboardHeader.styles.css';
+import './DashboardHeader.styles.css';
+
+import UserWidget from '../UserWidget/UserWidget.component';
 
 const DashboardHeader = (props) => {
   return (
-    <div className="dashboard-header">
-      <div className="logo">
-        <a href="#">Friendly Budget</a>
-      </div>
-      <div className="">
-        <span className="user">
-          Hi {props.user.displayName}!
-        </span>
-      </div>
+    <div className="dashboard-header container-fluid">
+      <a className="logo float-md-left" href="#">Friendly Budget</a>
+      <UserWidget
+        user={props.user}
+        selectedBudget={props.selectedBudget}
+      />
     </div>
   );
 };

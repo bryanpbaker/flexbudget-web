@@ -25,7 +25,7 @@ export function fetchSelectedBudget(uid) {
         if (budget.val().selected === true) {
           dispatch({
             type: SELECTED_BUDGET,
-            payload: budget.key,
+            payload: budget.val(),
           });
         }
       });
@@ -33,12 +33,13 @@ export function fetchSelectedBudget(uid) {
   };
 }
 
-export function createBudget(uid) {
+export function createBudget(uid, budgetName) {
   let newBudgetKey = '';
 
   return (dispatch) => {
     db.ref(`users/${uid}`).child('budgets')
       .push({
+        name: budgetName,
         selected: true,
         balance: 0,
       })
@@ -62,7 +63,7 @@ export function createBudget(uid) {
               } else {
                 dispatch({
                   type: CREATE_BUDGET,
-                  payload: budget.key,
+                  payload: budget.val(),
                 });
               }
             });
