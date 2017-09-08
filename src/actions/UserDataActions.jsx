@@ -4,6 +4,7 @@ const db = fb.database();
 
 export const FETCH_BUDGETS = 'FETCH_BUDGETS';
 export const CREATE_BUDGET = 'CREATE_BUDGET';
+export const SELECTED_BUDGET = 'SELECTED_BUDGET';
 
 export function fetchBudgets(uid) {
   return (dispatch) => {
@@ -20,12 +21,16 @@ export function fetchSelectedBudget(uid) {
   return (dispatch) => {
     db.ref(`users/${uid}`).child('budgets').once('value')
     .then((snapshot) => {
-      // snapshot.forEach((budget) => {
-      //   return budget.selected === true;
-      // });
-      console.log(snapshot);
+      snapshot.forEach((budget) => {
+        if (budget.val().selected === true) {
+          dispatch({
+            type: SELECTED_BUDGET,
+            payload: budget.key,
+          });
+        }
+      });
     });
-  }
+  };
 }
 
 export function createBudget(uid) {
@@ -35,7 +40,7 @@ export function createBudget(uid) {
     db.ref(`users/${uid}`).child('budgets')
       .push({
         selected: true,
-        balance: 0
+        balance: 0,
       })
       .then((res) => {
         console.log('Budget Created!', res)
@@ -57,10 +62,10 @@ export function createBudget(uid) {
               } else {
                 dispatch({
                   type: CREATE_BUDGET,
-                  payload: budget
-                })
+                  payload: budget.key,
+                });
               }
-            })
+            });
           });
       });
   };

@@ -3,9 +3,20 @@ import { connect } from 'react-redux';
 
 class Budget extends Component {
   render() {
+    if (this.props.selectedBudget) {
+      return (
+        <div>
+          <div>Budget</div>
+          <div>Budget ID: {this.props.selectedBudget}</div>
+        </div>
+      );
+    }
+
     return (
-      <div>Budget</div>
-    );
+      <div className="loading">
+        loading...
+      </div>
+    )
   }
 }
 

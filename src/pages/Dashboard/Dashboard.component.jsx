@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import layout components
+import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
 import SignOut from '../../containers/SignOut/SignOut.container';
 import Budget from '../../containers/Budget/Budget.container';
@@ -12,16 +14,15 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps.selectedBudget);
+    console.log('budgets', nextProps.budgets);
   }
 
   render() {
     return (
       <div className="dashboard">
-        Dashboard
-        <p>
-          {this.props.user.displayName}
-        </p>
+        <DashboardHeader
+          user={this.props.user}
+        />
         <CreateBudget
           createBudget={() => this.props.createBudget(this.props.currentUser.uid)}
         />

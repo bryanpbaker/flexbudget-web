@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+// import components
 import Dashboard from './pages/Dashboard/Dashboard.component';
 import LandingPage from './pages/LandingPage/LandingPage.component';
 import { getCurrentUser, signUserOut } from './actions/AuthActions';
-
 import './App.css';
 
 class App extends Component {
