@@ -10,6 +10,7 @@ const DashboardHeader = (props) => {
       <UserWidget
         user={props.user}
         selectedBudget={props.selectedBudget}
+        toggleModal={props.toggleModal}
       />
     </div>
   );

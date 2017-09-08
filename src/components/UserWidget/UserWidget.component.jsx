@@ -29,7 +29,11 @@ class UserWidget extends Component {
             {this.props.user.displayName}
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem>Create New Budget</DropdownItem>
+            <DropdownItem
+              onClick={this.props.toggleModal}
+            >
+              Create New Budget
+            </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Budgets</DropdownItem>
             <DropdownItem divider />

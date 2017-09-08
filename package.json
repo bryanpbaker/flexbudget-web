@@ -6,6 +6,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "eslint-config-airbnb": "^15.1.0",
     "firebase": "^4.2.0",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
