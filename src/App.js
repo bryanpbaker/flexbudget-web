@@ -1,21 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+
+// import components
+import Dashboard from './pages/Dashboard/Dashboard.container';
+import LandingPage from './pages/LandingPage/LandingPage.component';
+import { getCurrentUser, signUserOut } from './actions/AuthActions';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+  }
+
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+    if (this.props.currentUser) {
+      return (
+        <div>
+          <Dashboard
+            user={this.props.currentUser}
+          />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      );
+    } else if (this.props.currentUser === false) {
+      return (
+        <div>
+          <LandingPage />
+        </div>
+      )
+    }
+
+    return (
+      <div className="loading">
+        Loading...
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+  };
+}
+
+export default connect(mapStateToProps, { getCurrentUser, signUserOut })(App);

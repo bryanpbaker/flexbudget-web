@@ -1,0 +1,18 @@
+.user-widget {
+  color: white;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+  top: 72%;
+}
+
+.dropdown-menu .dropdown-item {
+  line-height: 32px;
+  padding: 0px 15px;
+}
+
+.dropdown-menu .sign-out button {
+  display: block;
+  margin: 0 auto;
+}

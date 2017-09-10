@@ -1,0 +1,16 @@
+.dashboard-header {
+  background: #444;
+  height: 55px;
+  line-height: 55px;
+  margin-bottom: 20px;
+}
+
+.dashboard-header a.logo {
+  color: white;
+  font-weight: bold;
+  letter-spacing: -.3px;
+}
+
+.dashboard-header a.logo:hover {
+  cursor: pointer;
+}
