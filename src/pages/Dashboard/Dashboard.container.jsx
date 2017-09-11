@@ -6,7 +6,7 @@ import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.co
 import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
 import Budget from '../../components/Budget/Budget.component';
 // import action creators
-import { fetchBudgets, createBudget, fetchSelectedBudget } from '../../actions/UserDataActions.jsx';
+import { fetchBudgets, createBudget, fetchSelectedBudget, fetchCategories, createCategory } from '../../actions/BudgetActions.jsx';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class Dashboard extends Component {
     };
 
     this.toggleModal = this.toggleModal.bind(this);
+    this.addCategory = this.addCategory.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +31,10 @@ class Dashboard extends Component {
     });
   }
 
+  addCategory() {
+    this.props.createCategory(this.props.currentUser.uid, this.props.selectedBudget.key);
+  }
+
   render() {
     return (
       <div className="dashboard">
@@ -40,6 +45,8 @@ class Dashboard extends Component {
         />
         <Budget
           selectedBudget={this.props.selectedBudget}
+          addCategory={this.addCategory}
+          categories={this.props.categories}
         />
         <CreateBudget
           user={this.props.currentUser}
@@ -57,7 +64,8 @@ function mapStateToProps(state) {
     currentUser: state.currentUser,
     budgets: state.budgets,
     selectedBudget: state.selectedBudget,
+    categories: state.categories
   };
 }
 
-export default connect(mapStateToProps, { fetchBudgets, createBudget, fetchSelectedBudget })(Dashboard);
+export default connect(mapStateToProps, { fetchBudgets, createBudget, fetchSelectedBudget, createCategory })(Dashboard);

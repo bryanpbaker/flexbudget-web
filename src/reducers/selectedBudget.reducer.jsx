@@ -1,4 +1,4 @@
-import { CREATE_BUDGET, SELECTED_BUDGET } from '../actions/UserDataActions';
+import { CREATE_BUDGET, SELECTED_BUDGET } from '../actions/BudgetActions';
 
 export default function (state = null, action) {
   switch (action.type) {
