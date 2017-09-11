@@ -59,7 +59,6 @@ export function createBudget(uid, budgetName) {
         balance: 0,
       })
       .then((res) => {
-        console.log('Budget Created!', res)
         newBudgetKey = res.key;
       })
       .then(() => {
@@ -82,8 +81,7 @@ export function createBudget(uid, budgetName) {
       })
       .then(() => {
         db.ref(`users/${uid}/budgets/${newBudgetKey}`).child('categories')
-          .once('value')
-          .then((snapshot) => {
+          .on('value', (snapshot) => {
             dispatch({
               type: FETCH_CATEGORIES,
               payload: snapshot.val()
@@ -98,7 +96,6 @@ export function createCategory(uid, budgetKey) {
     db.ref(`users/${uid}/budgets/${budgetKey}`).child('categories')
       .push({
         name: 'Category',
-      })
-      .then(() => console.log('Category Created'));
+      });
   }
 }

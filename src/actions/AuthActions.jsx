@@ -13,8 +13,6 @@ export function createUser(email, password) {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        // console.log('User created!');
-        // console.log(user);
         dispatch({ type: CREATE_USER, payload: user });
       })
       .catch(error => console.error(error));
@@ -26,8 +24,6 @@ export function authenticateUser(email, password) {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        // console.log('User Logged In!');
-        // console.log(user);
         dispatch({ type: AUTHENTICATE_USER, payload: user });
       })
       .catch(error => console.error(error));
@@ -51,11 +47,9 @@ export function getCurrentUser() {
     auth
       .onAuthStateChanged((user) => {
         if (user) {
-          // console.log('user', user);
           dispatch({ type: CURRENT_USER, payload: user });
         } else {
           dispatch({ type: CURRENT_USER, payload: false })
-          // console.log('No user is currently signed in');
         }
       });
   };

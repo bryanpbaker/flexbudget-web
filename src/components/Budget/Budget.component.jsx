@@ -14,8 +14,8 @@ class Budget extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      categories: _.values(nextProps.categories),
-    });
+      categories: _.values(nextProps.categories) || [],
+    })
   }
 
   render() {
