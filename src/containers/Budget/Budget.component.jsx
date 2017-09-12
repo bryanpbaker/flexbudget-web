@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Badge, Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Badge, Button, Form, FormGroup, Input } from 'reactstrap';
 import _ from 'lodash';
 import './Budget.styles.css';
+import { createCategory } from '../../actions/BudgetActions';
 
 class Budget extends Component {
   constructor(props) {
@@ -9,12 +11,30 @@ class Budget extends Component {
 
     this.state = {
       categories: [],
-    }
+      newCategoryName: '',
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.addCategory = this.addCategory.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       categories: _.values(nextProps.categories) || [],
+    });
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      newCategoryName: event.target.value,
+    });
+  }
+
+  addCategory(event) {
+    event.preventDefault();
+    this.props.createCategory(this.props.user.uid, this.props.selectedBudget.key, this.state.newCategoryName);
+    this.setState({
+      newCategoryName: ''
     })
   }
 
@@ -45,11 +65,19 @@ class Budget extends Component {
                 {categoryList}
               </ul>
               <span className="add-category">
-                <Button
-                  onClick={this.props.addCategory}
+                <Form
+                  onSubmit={this.addCategory}
                 >
-                  Add Category
-                </Button>
+                  <FormGroup>
+                    <Input
+                      type="text"
+                      onChange={this.handleInputChange}
+                      value={this.state.newCategoryName}
+                      placeholder="Enter a category name"
+                    />
+                  </FormGroup>
+                  <Button>Create Category</Button>
+                </Form>
               </span>
             </div>
           </div>
@@ -66,4 +94,10 @@ class Budget extends Component {
   }
 }
 
-export default Budget;
+function mapStateToProps(state) {
+  return {
+    categories: state.categories,
+  };
+}
+
+export default connect(mapStateToProps, { createCategory })(Budget);

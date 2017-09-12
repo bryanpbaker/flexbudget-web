@@ -91,11 +91,11 @@ export function createBudget(uid, budgetName) {
   };
 }
 
-export function createCategory(uid, budgetKey) {
+export function createCategory(uid, budgetKey, name) {
   return (dispatch) => {
     db.ref(`users/${uid}/budgets/${budgetKey}`).child('categories')
       .push({
-        name: 'Category',
+        name,
       });
   }
 }

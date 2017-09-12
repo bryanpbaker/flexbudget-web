@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
-import Budget from '../../components/Budget/Budget.component';
+import Budget from '../../containers/Budget/Budget.component';
 // import action creators
-import { fetchBudgets, createBudget, fetchSelectedBudget, fetchCategories, createCategory } from '../../actions/BudgetActions.jsx';
+import { fetchBudgets, createBudget, fetchSelectedBudget } from '../../actions/BudgetActions.jsx';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Dashboard extends Component {
     };
 
     this.toggleModal = this.toggleModal.bind(this);
-    this.addCategory = this.addCategory.bind(this);
   }
 
   componentDidMount() {
@@ -31,10 +30,6 @@ class Dashboard extends Component {
     });
   }
 
-  addCategory() {
-    this.props.createCategory(this.props.currentUser.uid, this.props.selectedBudget.key);
-  }
-
   render() {
     return (
       <div className="dashboard">
@@ -44,9 +39,8 @@ class Dashboard extends Component {
           toggleModal={this.toggleModal}
         />
         <Budget
+          user={this.props.currentUser}
           selectedBudget={this.props.selectedBudget}
-          addCategory={this.addCategory}
-          categories={this.props.categories}
         />
         <CreateBudget
           user={this.props.currentUser}
@@ -68,4 +62,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchBudgets, createBudget, fetchSelectedBudget, createCategory })(Dashboard);
+export default connect(mapStateToProps, { fetchBudgets, createBudget, fetchSelectedBudget })(Dashboard);
