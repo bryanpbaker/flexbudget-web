@@ -49,7 +49,11 @@ class Budget extends Component {
     // prevent form submit
     event.preventDefault();
     // call `createCategory` action creator
-    this.props.createCategory(this.props.user.uid, this.props.selectedBudget.key, this.state.newCategoryName);
+    this.props.createCategory(
+      this.props.user.uid,
+      this.props.selectedBudget.key,
+      this.state.newCategoryName
+    );
     // reset newCategoryName state
     this.setState({
       newCategoryName: '',
@@ -80,13 +84,23 @@ class Budget extends Component {
       let keyGen = 1;
 
       const categoryList = this.state.categories.map((category) => {
-        return <li key={keyGen++}>{category.name}: <input type="number" value={category.budgeted} /></li>
+        return (
+          <li
+            key={keyGen++}
+          >
+            {category.name}: <input type="number" value={category.budgeted} />
+          </li>
+        );
       })
 
       return (
         <div className="container-fluid">
           <div className="row">
-            <div className="col-xs-12 budget-period">{months[date.getMonth()]} {date.getYear() + 1900}</div>
+            <div
+              className="col-xs-12 budget-period"
+            >
+              {months[date.getMonth()]} {date.getYear() + 1900}
+            </div>
           </div>
           <div className="row">
             <div className="col-xs-12 col-md-6 name">
@@ -123,7 +137,7 @@ class Budget extends Component {
       <div className="loading">
         loading...
       </div>
-    )
+    );
   }
 }
 
