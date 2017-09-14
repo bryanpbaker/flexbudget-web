@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
-import Budget from '../../containers/Budget/Budget.component';
+import Budget from '../../containers/Budget/Budget.container';
 // import action creators
 import { fetchBudgets, createBudget, fetchSelectedBudget } from '../../actions/BudgetActions.jsx';
 

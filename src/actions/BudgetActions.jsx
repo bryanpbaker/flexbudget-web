@@ -1,13 +1,21 @@
+// import firebase config
 import fb from '../config/firebase.config';
 
+// firebase database() ref
 const db = fb.database();
 
+// action types
 export const FETCH_BUDGETS = 'FETCH_BUDGETS';
 export const CREATE_BUDGET = 'CREATE_BUDGET';
 export const SELECTED_BUDGET = 'SELECTED_BUDGET';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 
+/**
+ * fetches a list of budgets from firebase
+ * @param  {string} uid the user's uid
+ * @return {function} dispatch list of budgets
+ */
 export function fetchBudgets(uid) {
   return (dispatch) => {
     db.ref(`users/${uid}`).child('budgets').on('value', (snapshot) => {
@@ -19,6 +27,11 @@ export function fetchBudgets(uid) {
   };
 }
 
+/**
+ * fetches the currently selected budget
+ * @param  {string} uid the user's uid
+ * @return {dispatch} dispatches the selected budget and categories
+ */
 export function fetchSelectedBudget(uid) {
   let budgetKey = '';
 
@@ -96,6 +109,7 @@ export function createCategory(uid, budgetKey, name) {
     db.ref(`users/${uid}/budgets/${budgetKey}`).child('categories')
       .push({
         name,
+        budgeted: 0,
       });
   }
 }
