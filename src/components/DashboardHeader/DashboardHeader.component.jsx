@@ -6,7 +6,7 @@ import UserWidget from '../UserWidget/UserWidget.component';
 const DashboardHeader = (props) => {
   return (
     <div className="dashboard-header container-fluid">
-      <a className="logo float-md-left" href="#">Friendly Budget</a>
+      <a className="logo float-md-left" href="#">Flexbudget</a>
       <UserWidget
         user={props.user}
         selectedBudget={props.selectedBudget}

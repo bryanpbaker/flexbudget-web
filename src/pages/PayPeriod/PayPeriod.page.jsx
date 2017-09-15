@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
-import CreateBudget from '../../components/CreateBudget/CreateBudget.component'
+import CreatePayPeriod from '../../components/CreatePayPeriod/CreatePayPeriod.component'
 import Budget from '../../containers/Budget/Budget.container';
 // import action creators
-import { fetchBudgets, createBudget, fetchSelectedBudget } from '../../actions/BudgetActions.jsx';
+import { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod } from '../../actions/PayPeriodActions.jsx';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchBudgets(this.props.currentUser.uid);
-    this.props.fetchSelectedBudget(this.props.currentUser.uid);
+    this.props.fetchPayPeriods(this.props.currentUser.uid);
+    this.props.fetchSelectedPayPeriod(this.props.currentUser.uid);
   }
 
   toggleModal() {
@@ -35,16 +35,12 @@ class Dashboard extends Component {
       <div className="dashboard">
         <DashboardHeader
           user={this.props.user}
-          selectedBudget={this.props.selectedBudget}
+          selectedPayPeriod={this.props.selectedPayPeriod}
           toggleModal={this.toggleModal}
         />
-        <Budget
+        <CreatePayPeriod
           user={this.props.currentUser}
-          selectedBudget={this.props.selectedBudget}
-        />
-        <CreateBudget
-          user={this.props.currentUser}
-          createBudget={this.props.createBudget}
+          createPayPeriod={this.props.createPayPeriod}
           modalIsOpen={this.state.modalIsOpen}
           toggleModal={this.toggleModal}
         />
@@ -62,4 +58,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchBudgets, createBudget, fetchSelectedBudget })(Dashboard);
+export default connect(mapStateToProps, { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod })(Dashboard);

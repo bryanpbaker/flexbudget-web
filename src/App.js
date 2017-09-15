@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // import components
-import Dashboard from './pages/Dashboard/Dashboard.container';
+import PayPeriod from './pages/PayPeriod/PayPeriod.page';
 import LandingPage from './pages/LandingPage/LandingPage.component';
 import { getCurrentUser, signUserOut } from './actions/AuthActions';
 import './App.css';
@@ -16,7 +16,7 @@ class App extends Component {
     if (this.props.currentUser) {
       return (
         <div>
-          <Dashboard
+          <PayPeriod
             user={this.props.currentUser}
           />
         </div>

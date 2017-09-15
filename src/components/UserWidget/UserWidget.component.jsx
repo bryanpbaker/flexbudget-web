@@ -32,7 +32,7 @@ class UserWidget extends Component {
             <DropdownItem
               onClick={this.props.toggleModal}
             >
-              Create New Budget
+              Create New Pay Period
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Budgets</DropdownItem>

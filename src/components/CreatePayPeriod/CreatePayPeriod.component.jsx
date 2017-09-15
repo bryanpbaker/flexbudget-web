@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import Modal from 'react-modal';
-import './CreateBudget.styles.css';
+import './CreatePayPeriod.styles.css';
 
-class CreateBudget extends Component {
+class CreatePayPeriod extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      budgetName: '',
+      payPeriodName: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.createBudget = this.createBudget.bind(this);
+    this.createPayPeriod = this.createPayPeriod.bind(this);
   }
 
   handleInputChange(event) {
     this.setState({
-      budgetName: event.target.value,
+      payPeriodName: event.target.value,
     });
   }
 
-  createBudget(event) {
+  createPayPeriod(event) {
     event.preventDefault();
 
-    this.props.createBudget(this.props.user.uid, this.state.budgetName);
+    this.props.createPayPeriod(this.props.user.uid, this.state.payPeriodName);
     setTimeout(() => {
       this.props.toggleModal();
-      this.setState({ budgetName: '' });
+      this.setState({ payPeriodName: '' });
     }, 300);
   }
 
   render() {
     return (
-      <div className="create-budget">
+      <div className="create-pay-period">
         <Modal
           isOpen={this.props.modalIsOpen}
           contentLabel="Modal"
@@ -42,7 +42,7 @@ class CreateBudget extends Component {
             <div className="row justify-content-center">
               <div className="col-md-6">
                 <Form
-                  onSubmit={this.createBudget}
+                  onSubmit={this.createPayPeriod}
                 >
                   <a
                     onClick={this.props.toggleModal}
@@ -53,11 +53,11 @@ class CreateBudget extends Component {
                     <Input
                       type="text"
                       onChange={this.handleInputChange}
-                      value={this.state.budgetName}
-                      placeholder="Enter a name for your budget"
+                      value={this.state.payPeriodName}
+                      placeholder="Enter a name for your pay period"
                     />
                   </FormGroup>
-                  <Button>Create Budget</Button>
+                  <Button>Create Pay Period</Button>
                 </Form>
               </div>
             </div>
@@ -68,4 +68,4 @@ class CreateBudget extends Component {
   }
 };
 
-export default CreateBudget;
+export default CreatePayPeriod;
