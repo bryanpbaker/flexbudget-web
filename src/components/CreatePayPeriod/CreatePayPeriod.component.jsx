@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap'
 import Modal from 'react-modal';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
 import './CreatePayPeriod.styles.css';
 
 class CreatePayPeriod extends Component {
@@ -18,13 +20,17 @@ class CreatePayPeriod extends Component {
   handleInputChange(event) {
     this.setState({
       payPeriodName: event.target.value,
+      startDate: null,
+      endDate: null,
+      focusedInput: null,
     });
   }
 
   createPayPeriod(event) {
     event.preventDefault();
+    const { payPeriodName, startDate, endDate } = this.state;
 
-    this.props.createPayPeriod(this.props.user.uid, this.state.payPeriodName);
+    this.props.createPayPeriod(this.props.user.uid, payPeriodName, startDate, endDate);
     setTimeout(() => {
       this.props.toggleModal();
       this.setState({ payPeriodName: '' });
@@ -55,6 +61,15 @@ class CreatePayPeriod extends Component {
                       onChange={this.handleInputChange}
                       value={this.state.payPeriodName}
                       placeholder="Enter a name for your pay period"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <DateRangePicker
+                      startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                      endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                      onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                      focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                      onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />
                   </FormGroup>
                   <Button>Create Pay Period</Button>

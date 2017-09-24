@@ -46,7 +46,7 @@ export function fetchSelectedPayPeriod(uid) {
   };
 }
 
-export function createPayPeriod(uid, payPeriodName) {
+export function createPayPeriod(uid, payPeriodName, startDate, endDate) {
   let newPayPeriodKey = '';
 
   return (dispatch) => {
@@ -54,6 +54,8 @@ export function createPayPeriod(uid, payPeriodName) {
       .push({
         name: payPeriodName,
         selected: true,
+        startDate: startDate.format(),
+        endDate: endDate.format(),
         balance: 0,
       })
       .then((res) => {
