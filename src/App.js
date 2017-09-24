@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // import components
 import PayPeriod from './pages/PayPeriod/PayPeriod.page';
-import LandingPage from './pages/LandingPage/LandingPage.component';
+import LandingPage from './pages/LandingPage/LandingPage.page';
 import { getCurrentUser, signUserOut } from './actions/AuthActions';
 import './App.css';
 

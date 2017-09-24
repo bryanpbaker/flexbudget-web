@@ -7,6 +7,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const CURRENT_USER = 'CURRENT_USER';
 export const FACEBOOK_AUTHENTICATE_USER = 'FACEBOOK_AUTHENTICATE_USER';
+export const AUTH_STATE = 'AUTH_STATE';
 
 export function createUser(email, password) {
   return (dispatch) => {
@@ -52,6 +53,15 @@ export function getCurrentUser() {
           dispatch({ type: CURRENT_USER, payload: false })
         }
       });
+  };
+}
+
+export function checkAuthState() {
+  console.log('hit');
+  return {
+    type: AUTH_STATE,
+    payload: Object.keys(window.localStorage)
+      .filter(item => item.startsWith('firebase:authUser'))[0],
   };
 }
 
