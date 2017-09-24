@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 const Balance = (props) => {
   return (
@@ -9,10 +8,4 @@ const Balance = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    currentBalance: state.currentBalance,
-  };
-}
-
-export default connect(mapStateToProps, null)(Balance);
+export default Balance;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './DashboardHeader.styles.css';
 
 import UserWidget from '../UserWidget/UserWidget.component';
@@ -6,7 +7,7 @@ import UserWidget from '../UserWidget/UserWidget.component';
 const DashboardHeader = (props) => {
   return (
     <div className="dashboard-header container-fluid">
-      <a className="logo float-md-left" href="#">Flexbudget</a>
+      <Link to={'/'} className="logo float-md-left">Flexbudget</Link>
       <UserWidget
         user={props.user}
         selectedBudget={props.selectedBudget}

@@ -80,7 +80,7 @@ class Budget extends Component {
     // if there is a selectedBudget, render it
     if (this.props.selectedBudget) {
       // destructure selectedBudget properties
-      const { name, key, balance } = this.props.selectedBudget.val();
+      const { name, balance } = this.props.selectedBudget.val();
       let keyGen = 1;
 
       const categoryList = this.state.categories.map((category) => {

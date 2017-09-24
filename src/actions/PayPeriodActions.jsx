@@ -38,7 +38,7 @@ export function fetchSelectedPayPeriod(uid) {
         if (payPeriod.val().selected === true) {
           dispatch({
             type: SELECTED_PAY_PERIOD,
-            payload: payPeriod,
+            payload: payPeriod.val(),
           });
         }
       });
@@ -71,7 +71,7 @@ export function createPayPeriod(uid, payPeriodName) {
               } else {
                 dispatch({
                   type: CREATE_PAY_PERIOD,
-                  payload: payPeriod,
+                  payload: payPeriod.val(),
                 });
               }
             });
@@ -79,13 +79,3 @@ export function createPayPeriod(uid, payPeriodName) {
       });
   };
 }
-
-// export function createCategory(uid, budgetKey, name) {
-//   return (dispatch) => {
-//     db.ref(`users/${uid}/budgets/${budgetKey}`).child('categories')
-//       .push({
-//         name,
-//         budgeted: 0,
-//       });
-//   }
-// }

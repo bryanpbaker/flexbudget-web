@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
+import PayPeriodSubHeader from '../../components/PayPeriodSubHeader/PayPeriodSubHeader.component';
 import CreatePayPeriod from '../../components/CreatePayPeriod/CreatePayPeriod.component'
-import Budget from '../../containers/Budget/Budget.container';
+// import Budget from '../../containers/Budget/Budget.container';
 // import action creators
 import { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod } from '../../actions/PayPeriodActions.jsx';
 
@@ -44,6 +45,11 @@ class Dashboard extends Component {
           modalIsOpen={this.state.modalIsOpen}
           toggleModal={this.toggleModal}
         />
+        { this.props.selectedPayPeriod &&
+          <PayPeriodSubHeader
+            selectedPayPeriod={this.props.selectedPayPeriod}
+          />
+        }
       </div>
     );
   }
@@ -52,10 +58,10 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
-    budgets: state.budgets,
-    selectedBudget: state.selectedBudget,
-    categories: state.categories
+    payPeriods: state.payPeriods,
+    selectedPayPeriod: state.selectedPayPeriod,
   };
 }
 
-export default connect(mapStateToProps, { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod })(Dashboard);
+export default
+  connect(mapStateToProps, { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod })(Dashboard);
