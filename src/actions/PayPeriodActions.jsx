@@ -54,8 +54,8 @@ export function createPayPeriod(uid, payPeriodName, startDate, endDate) {
       .push({
         name: payPeriodName,
         selected: true,
-        startDate: startDate.format(),
-        endDate: endDate.format(),
+        startDate: startDate.format('MMMM D, YYYY'),
+        endDate: endDate.format('MMMM D, YYYY'),
         balance: 0,
       })
       .then((res) => {

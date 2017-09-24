@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge } from 'reactstrap';
 
 const PayPeriodSubHeader = (props) => {
-  const { name, balance } = props.selectedPayPeriod;
+  const { name, balance, startDate, endDate } = props.selectedPayPeriod;
   let balanceState = null;
 
   if (balance > 0) {
@@ -17,7 +17,7 @@ const PayPeriodSubHeader = (props) => {
         <div className="info col">
           <h2>{name}</h2>
         </div>
-        <div className="dates col"><h5>September 30th - October 14th</h5></div>
+        <div className="dates col"><h5>{startDate} - {endDate}</h5></div>
         <div className="tabs col"></div>
         <div className="balance col">
           <h2 className="text-right">
