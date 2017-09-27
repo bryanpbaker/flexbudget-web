@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Nav, NavItem, NavDropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink, Badge } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
+import { Badge } from 'reactstrap';
 
 const PayPeriodSubHeader = (props) => {
   const { name, balance, startDate, endDate } = props.selectedPayPeriod;
@@ -19,7 +19,6 @@ const PayPeriodSubHeader = (props) => {
           <h2>{name}</h2>
         </div>
         <div className="dates col"><h5>{startDate} - {endDate}</h5></div>
-        <div className="tabs col"></div>
         <div className="balance col">
           <h2 className="text-right">
             <Badge
@@ -34,13 +33,13 @@ const PayPeriodSubHeader = (props) => {
         <div className="col" style={{ marginTop: '25px' }}>
           <ul className="nav nav-pills">
             <li className="nav-item">
-              <Link to={'/dashboard/budget'} className="nav-link active">Budget</Link>
+              <NavLink to={'/dashboard/budget'} className="nav-link">Budget</NavLink>
             </li>
             <li className="nav-item">
-              <Link to={'/dashboard/transactions'} className="nav-link">Transactions</Link>
+              <NavLink to={'/dashboard/transactions'} className="nav-link">Transactions</NavLink>
             </li>
             <li className="nav-item">
-              <Link to={'/dashboard/reports'} className="nav-link">Reports</Link>
+              <NavLink to={'/dashboard/reports'} className="nav-link">Reports</NavLink>
             </li>
           </ul>
         </div>

@@ -35,7 +35,7 @@ class UserWidget extends Component {
               Create New Pay Period
             </DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>My Budgets</DropdownItem>
+            <DropdownItem>Open a Pay Period</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>Profile</DropdownItem>
             <DropdownItem divider />

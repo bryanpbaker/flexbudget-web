@@ -41,7 +41,7 @@ class CreatePayPeriod extends Component {
     return (
       <div className="create-pay-period">
         <Modal
-          isOpen={this.props.modalIsOpen}
+          isOpen={this.props.createModalIsOpen}
           contentLabel="Modal"
         >
           <div className="container">

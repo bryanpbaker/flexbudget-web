@@ -6,6 +6,10 @@ import { Route, Redirect } from 'react-router-dom';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import PayPeriodSubHeader from '../../components/PayPeriodSubHeader/PayPeriodSubHeader.component';
 import CreatePayPeriod from '../../components/CreatePayPeriod/CreatePayPeriod.component'
+import Budget from '../../components/Budget/Budget.component';
+import Transactions from '../../components/Transactions/Transactions.component';
+import Reports from '../../components/Reports/Reports.component';
+import PayPeriodList from '../../components/PayPeriodList/PayPeriodList.component';
 // import action creators
 import { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod } from '../../actions/PayPeriodActions';
 import { getCurrentUser } from '../../actions/AuthActions';
@@ -15,12 +19,13 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      modalIsOpen: false,
+      createModalIsOpen: false,
+      selectModalIsOpen: false,
       authUser: Object.keys(window.localStorage)
         .filter(item => item.startsWith('firebase:authUser'))[0],
     };
 
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleCreateModal = this.toggleCreateModal.bind(this);
   }
 
   componentDidMount() {
@@ -34,9 +39,9 @@ class Dashboard extends Component {
     }
   }
 
-  toggleModal() {
+  toggleCreateModal() {
     this.setState({
-      modalIsOpen: !this.state.modalIsOpen,
+      createModalIsOpen: !this.state.createModalIsOpen,
     });
   }
 
@@ -48,19 +53,26 @@ class Dashboard extends Component {
             <DashboardHeader
               user={this.props.currentUser}
               selectedPayPeriod={this.props.selectedPayPeriod}
-              toggleModal={this.toggleModal}
+              toggleModal={this.toggleCreateModal}
             />
             <CreatePayPeriod
               user={this.props.currentUser}
               createPayPeriod={this.props.createPayPeriod}
-              modalIsOpen={this.state.modalIsOpen}
-              toggleModal={this.toggleModal}
+              createModalIsOpen={this.state.createModalIsOpen}
+              toggleModal={this.toggleCreateModal}
             />
             { this.props.selectedPayPeriod &&
               <PayPeriodSubHeader
                 selectedPayPeriod={this.props.selectedPayPeriod}
               />
             }
+            <PayPeriodList
+              modalIsOpen={this.state.selectModalIsOpen}
+              payPeriods={this.props.payPeriods}
+            />
+            <Route path="/dashboard/budget" component={Budget} />
+            <Route path="/dashboard/transactions" component={Transactions} />
+            <Route path="/dashboard/reports" component={Reports} />
           </div>
         );
       }
