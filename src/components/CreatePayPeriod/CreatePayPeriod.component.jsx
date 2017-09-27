@@ -32,7 +32,7 @@ class CreatePayPeriod extends Component {
 
     this.props.createPayPeriod(this.props.user.uid, payPeriodName, startDate, endDate);
     setTimeout(() => {
-      this.props.toggleModal();
+      this.props.toggleCreateModal();
       this.setState({ payPeriodName: '' });
     }, 300);
   }

@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Modal from 'react-modal';
 
 const PayPeriodList = (props) => {
+  let key = 1;
+  
+  const payPeriodList = _.flatMap(props.payPeriods, (payPeriod) => {
+    return <li key={key++}>{payPeriod.name}</li>;
+  });
+
   return (
     <div className="pay-period-list">
       <Modal
@@ -10,10 +17,7 @@ const PayPeriodList = (props) => {
         contentLabel="Select a Pay Period"
       >
         <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-          <li>Four</li>
+          {payPeriodList}
         </ul>
       </Modal>
     </div>
