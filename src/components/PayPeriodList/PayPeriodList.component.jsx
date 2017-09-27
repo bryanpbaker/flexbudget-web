@@ -6,6 +6,7 @@ const PayPeriodList = (props) => {
     <div className="pay-period-list">
       <Modal
         isOpen={props.selectModalIsOpen}
+        onRequestClose={props.toggleSelectModal}
         contentLabel="Select a Pay Period"
       >
         <ul>

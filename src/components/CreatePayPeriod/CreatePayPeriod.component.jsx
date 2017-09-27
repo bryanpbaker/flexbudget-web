@@ -42,6 +42,7 @@ class CreatePayPeriod extends Component {
       <div className="create-pay-period">
         <Modal
           isOpen={this.props.createModalIsOpen}
+          onRequestClose={this.props.toggleCreateModal}
           contentLabel="Modal"
         >
           <div className="container">
@@ -51,7 +52,7 @@ class CreatePayPeriod extends Component {
                   onSubmit={this.createPayPeriod}
                 >
                   <a
-                    onClick={this.props.toggleModal}
+                    onClick={this.props.toggleCreateModal}
                   >
                     Close
                   </a>

@@ -26,6 +26,7 @@ class Dashboard extends Component {
     };
 
     this.toggleCreateModal = this.toggleCreateModal.bind(this);
+    this.toggleSelectModal = this.toggleSelectModal.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +46,12 @@ class Dashboard extends Component {
     });
   }
 
+  toggleSelectModal() {
+    this.setState({
+      selectModalIsOpen: !this.state.selectModalIsOpen,
+    });
+  }
+
   render() {
     if (this.state.authUser) {
       if (this.props.currentUser) {
@@ -53,13 +60,14 @@ class Dashboard extends Component {
             <DashboardHeader
               user={this.props.currentUser}
               selectedPayPeriod={this.props.selectedPayPeriod}
-              toggleModal={this.toggleCreateModal}
+              toggleCreateModal={this.toggleCreateModal}
+              toggleSelectModal={this.toggleSelectModal}
             />
             <CreatePayPeriod
               user={this.props.currentUser}
               createPayPeriod={this.props.createPayPeriod}
               createModalIsOpen={this.state.createModalIsOpen}
-              toggleModal={this.toggleCreateModal}
+              toggleCreateModal={this.toggleCreateModal}
             />
             { this.props.selectedPayPeriod &&
               <PayPeriodSubHeader
@@ -67,7 +75,8 @@ class Dashboard extends Component {
               />
             }
             <PayPeriodList
-              modalIsOpen={this.state.selectModalIsOpen}
+              selectModalIsOpen={this.state.selectModalIsOpen}
+              toggleSelectModal={this.toggleSelectModal}
               payPeriods={this.props.payPeriods}
             />
             <Route path="/dashboard/budget" component={Budget} />

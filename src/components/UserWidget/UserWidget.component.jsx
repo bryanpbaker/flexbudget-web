@@ -30,12 +30,16 @@ class UserWidget extends Component {
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem
-              onClick={this.props.toggleModal}
+              onClick={this.props.toggleCreateModal}
             >
               Create New Pay Period
             </DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>Open a Pay Period</DropdownItem>
+            <DropdownItem
+              onClick={this.props.toggleSelectModal}
+            >
+              Open a Pay Period
+            </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>Profile</DropdownItem>
             <DropdownItem divider />
