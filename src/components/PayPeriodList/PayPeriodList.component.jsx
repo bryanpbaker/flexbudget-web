@@ -4,9 +4,17 @@ import Modal from 'react-modal';
 
 const PayPeriodList = (props) => {
   let key = 1;
-  
+
   const payPeriodList = _.flatMap(props.payPeriods, (payPeriod) => {
-    return <li key={key++}>{payPeriod.name}</li>;
+    return (
+      <li
+        key={key++}
+      >
+        <button onClick={() => props.selectPayPeriod(payPeriod.id)}>
+          {payPeriod.name}
+        </button>
+      </li>
+    );
   });
 
   return (

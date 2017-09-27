@@ -1,8 +1,16 @@
 // import firebase config
 import fb from '../config/firebase.config';
+import shortid from 'shortid';
 
 // firebase database() ref
 const db = fb.database();
+
+// parse uid of current user from localStorage
+const userId = JSON.parse(localStorage.getItem(Object.keys(window.localStorage)
+  .filter(item => item.startsWith('firebase:authUser'))[0])).uid;
+
+// base pay periods node
+const payPeriodsRef = db.ref(`users/${userId}`).child('pay-periods');
 
 // action types
 export const FETCH_PAY_PERIODS = 'FETCH_PAY_PERIODS';
@@ -14,9 +22,9 @@ export const SELECTED_PAY_PERIOD = 'SELECTED_PAY_PERIOD';
  * @param  {string} uid the user's uid
  * @return {function} dispatch list of pay periods
  */
-export function fetchPayPeriods(uid) {
+export function fetchPayPeriods() {
   return (dispatch) => {
-    db.ref(`users/${uid}`).child('pay-periods').on('value', (snapshot) => {
+    payPeriodsRef.on('value', (snapshot) => {
       dispatch({
         type: FETCH_PAY_PERIODS,
         payload: snapshot.val(),
@@ -30,9 +38,9 @@ export function fetchPayPeriods(uid) {
  * @param  {string} uid the user's uid
  * @return {dispatch} dispatches the selected pay period
  */
-export function fetchSelectedPayPeriod(uid) {
+export function fetchSelectedPayPeriod() {
   return (dispatch) => {
-    db.ref(`users/${uid}`).child('pay-periods').once('value')
+    payPeriodsRef.once('value')
     .then((snapshot) => {
       snapshot.forEach((payPeriod) => {
         if (payPeriod.val().selected === true) {
@@ -46,12 +54,13 @@ export function fetchSelectedPayPeriod(uid) {
   };
 }
 
-export function createPayPeriod(uid, payPeriodName, startDate, endDate) {
+export function createPayPeriod(payPeriodName, startDate, endDate) {
   let newPayPeriodKey = '';
 
   return (dispatch) => {
-    db.ref(`users/${uid}`).child('pay-periods')
+    payPeriodsRef
       .push({
+        id: shortid.generate(),
         name: payPeriodName,
         selected: true,
         startDate: startDate.format('MMMM D, YYYY'),
@@ -62,11 +71,11 @@ export function createPayPeriod(uid, payPeriodName, startDate, endDate) {
         newPayPeriodKey = res.key;
       })
       .then(() => {
-        db.ref(`users/${uid}`).child('pay-periods').once('value')
+        payPeriodsRef.once('value')
           .then((snapshot) => {
             snapshot.forEach((payPeriod) => {
               if (payPeriod.key !== newPayPeriodKey) {
-                db.ref(`users/${uid}`).child(`pay-periods/${payPeriod.key}`)
+                payPeriodsRef.child(payPeriod.key)
                   .update({
                     selected: false,
                   });
@@ -81,3 +90,7 @@ export function createPayPeriod(uid, payPeriodName, startDate, endDate) {
       });
   };
 }
+
+export function selectPayPeriod(id) {
+
+};

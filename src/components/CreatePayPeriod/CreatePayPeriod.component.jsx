@@ -30,7 +30,7 @@ class CreatePayPeriod extends Component {
     event.preventDefault();
     const { payPeriodName, startDate, endDate } = this.state;
 
-    this.props.createPayPeriod(this.props.user.uid, payPeriodName, startDate, endDate);
+    this.props.createPayPeriod(payPeriodName, startDate, endDate);
     setTimeout(() => {
       this.props.toggleCreateModal();
       this.setState({ payPeriodName: '' });

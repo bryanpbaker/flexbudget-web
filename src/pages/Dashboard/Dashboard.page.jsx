@@ -11,7 +11,7 @@ import Transactions from '../../components/Transactions/Transactions.component';
 import Reports from '../../components/Reports/Reports.component';
 import PayPeriodList from '../../components/PayPeriodList/PayPeriodList.component';
 // import action creators
-import { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod } from '../../actions/PayPeriodActions';
+import { fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod, selectPayPeriod } from '../../actions/PayPeriodActions';
 import { getCurrentUser } from '../../actions/AuthActions';
 
 class Dashboard extends Component {
@@ -27,6 +27,7 @@ class Dashboard extends Component {
 
     this.toggleCreateModal = this.toggleCreateModal.bind(this);
     this.toggleSelectModal = this.toggleSelectModal.bind(this);
+    this.selectPayPeriod = this.selectPayPeriod.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +51,10 @@ class Dashboard extends Component {
     this.setState({
       selectModalIsOpen: !this.state.selectModalIsOpen,
     });
+  }
+
+  selectPayPeriod(payPeriod) {
+    this.props.selectPayPeriod(payPeriod);
   }
 
   render() {
@@ -78,6 +83,7 @@ class Dashboard extends Component {
               selectModalIsOpen={this.state.selectModalIsOpen}
               toggleSelectModal={this.toggleSelectModal}
               payPeriods={this.props.payPeriods}
+              selectPayPeriod={this.selectPayPeriod}
             />
             <Route path="/dashboard/budget" component={Budget} />
             <Route path="/dashboard/transactions" component={Transactions} />
@@ -104,4 +110,4 @@ function mapStateToProps(state) {
 }
 
 export default
-  connect(mapStateToProps, { getCurrentUser, fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod })(Dashboard);
+  connect(mapStateToProps, { getCurrentUser, fetchPayPeriods, createPayPeriod, fetchSelectedPayPeriod, selectPayPeriod })(Dashboard);
