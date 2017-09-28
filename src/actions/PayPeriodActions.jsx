@@ -91,6 +91,34 @@ export function createPayPeriod(payPeriodName, startDate, endDate) {
   };
 }
 
-export function selectPayPeriod(id) {
-
-};
+export function selectPayPeriod(payPeriodId) {
+  return (dispatch) => {
+    payPeriodsRef.once('value')
+      .then((snapshot) => {
+        snapshot.forEach((payPeriod) => {
+          if (payPeriod.val().id !== payPeriodId) {
+            payPeriod.ref.update({
+              selected: false,
+            });
+          } else {
+            payPeriod.ref.update({
+              selected: true,
+            })
+            .then(() => {
+              payPeriodsRef.once('value')
+                .then((newSnapshot) => {
+                  newSnapshot.forEach((snap) => {
+                    if (snap.val().selected) {
+                      dispatch({
+                        type: SELECTED_PAY_PERIOD,
+                        payload: payPeriod.val(),
+                      });
+                    }
+                  });
+                });
+            });
+          }
+        });
+      });
+  };
+}

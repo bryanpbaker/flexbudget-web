@@ -55,6 +55,10 @@ class Dashboard extends Component {
 
   selectPayPeriod(payPeriod) {
     this.props.selectPayPeriod(payPeriod);
+
+    setTimeout(() => {
+      this.toggleSelectModal();
+    }, 300)
   }
 
   render() {
