@@ -63,8 +63,8 @@ export function createPayPeriod(payPeriodName, startDate, endDate) {
         id: shortid.generate(),
         name: payPeriodName,
         selected: true,
-        startDate: startDate.format('MMMM D, YYYY'),
-        endDate: endDate.format('MMMM D, YYYY'),
+        startDate: startDate.format('MMM D, YYYY'),
+        endDate: endDate.format('MMM D, YYYY'),
         balance: 0,
       })
       .then((res) => {

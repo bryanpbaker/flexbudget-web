@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import { Button } from 'reactstrap';
 // import layout components
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader.component';
 import PayPeriodSubHeader from '../../components/PayPeriodSubHeader/PayPeriodSubHeader.component';
@@ -82,6 +83,17 @@ class Dashboard extends Component {
               <PayPeriodSubHeader
                 selectedPayPeriod={this.props.selectedPayPeriod}
               />
+            }
+            { !this.props.payPeriods &&
+              <div className="container-fluid">
+                <h2>You don&#39;t have any Pay Periods!</h2>
+                <Button
+                  color="primary"
+                  onClick={this.toggleCreateModal}
+                >
+                  Create one now!
+                </Button>
+              </div>
             }
             <PayPeriodList
               selectModalIsOpen={this.state.selectModalIsOpen}

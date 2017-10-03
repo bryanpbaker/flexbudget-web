@@ -1,6 +1,7 @@
 import React from 'react';
+import Moment from 'moment';
 import { NavLink } from 'react-router-dom';
-import { Badge } from 'reactstrap';
+import { Badge, Button } from 'reactstrap';
 
 const PayPeriodSubHeader = (props) => {
   const { name, balance, startDate, endDate } = props.selectedPayPeriod;
@@ -12,6 +13,8 @@ const PayPeriodSubHeader = (props) => {
     balanceState = 'danger'
   }
 
+  console.log(Moment(endDate).format());
+
   return (
     <div className="pay-period-sub-header container-fluid">
       <div className="row align-items-center">
@@ -19,6 +22,7 @@ const PayPeriodSubHeader = (props) => {
           <h2>{name}</h2>
         </div>
         <div className="dates col"><h5>{startDate} - {endDate}</h5></div>
+        <span>This pay period has passed! <Button size="sm" color="danger">Roll over!</Button></span>
         <div className="balance col">
           <h2 className="text-right">
             <Badge
