@@ -13,8 +13,6 @@ const PayPeriodSubHeader = (props) => {
     balanceState = 'danger'
   }
 
-  console.log(Moment(endDate).format());
-
   return (
     <div className="pay-period-sub-header container-fluid">
       <div className="row align-items-center">
@@ -22,7 +20,11 @@ const PayPeriodSubHeader = (props) => {
           <h2>{name}</h2>
         </div>
         <div className="dates col"><h5>{startDate} - {endDate}</h5></div>
-        <span>This pay period has passed! <Button size="sm" color="danger">Roll over!</Button></span>
+        { // check to see if endDate of pay period has passed
+          // if so, prompt for a new pay period
+           Moment(endDate).format() < Moment().format() &&
+          <span>This pay period has passed! <Button onClick={props.toggleCreateModal} size="sm" color="danger">Roll over!</Button></span>
+        }
         <div className="balance col">
           <h2 className="text-right">
             <Badge

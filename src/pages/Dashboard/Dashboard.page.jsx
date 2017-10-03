@@ -82,6 +82,7 @@ class Dashboard extends Component {
             { this.props.selectedPayPeriod &&
               <PayPeriodSubHeader
                 selectedPayPeriod={this.props.selectedPayPeriod}
+                toggleCreateModal={this.toggleCreateModal}
               />
             }
             { !this.props.payPeriods &&
